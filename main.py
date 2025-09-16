@@ -50,10 +50,10 @@ def main():
         for asteroid in asteroids:
             if asteroid.collides_with(player):
                 die = True
-                print("Game over!")
-                if player.numberOfLives == 0:
-                    sys.exit()
                 player.die()
+                if player.numberOfLives == 0:
+                    print("Game over!")
+                    sys.exit()
             if die:
                 asteroid.kill()
             
@@ -61,6 +61,7 @@ def main():
                 if asteroid.collides_with(shot):
                     asteroid.split(player)
                     shot.kill()
+        
 
         screen.fill("black")
 
@@ -72,7 +73,6 @@ def main():
         writeText(screen,font, f"LIVES: {player.numberOfLives}", (SCREEN_WIDTH - 200,20))
 
         
-
         pygame.display.flip()
 
         # limit the framerate to 60 FPS
