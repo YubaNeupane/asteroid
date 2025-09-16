@@ -1,7 +1,7 @@
 ### Todo
 
-    - [ ] Add a scoring system
-    - [ ] Implement multiple lives and respawning
+    - [X] Add a scoring system
+    - [X] Implement multiple lives and respawning
     - [ ] Add an explosion effect for the asteroids
     - [ ] Add acceleration to the player movement
     - [ ] Make the objects wrap around the screen instead of disappearing

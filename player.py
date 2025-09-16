@@ -9,6 +9,8 @@ class Player (CircleShape):
         super().__init__(x,y,PLAYER_RADIUS)
         self.rotation = 0
         self.shootTimer = 0
+        self.score = 0
+        self.numberOfLives = 3
 
     def triangle(self):
         forward = pygame.Vector2(0, 1).rotate(self.rotation)
@@ -17,13 +19,19 @@ class Player (CircleShape):
         b = self.position - forward * self.radius - right
         c = self.position - forward * self.radius + right
         return [a, b, c]
+    
+    def add_score(self, amount):
+        self.score += amount
 
     def draw(self, screen):
         pygame.draw.polygon(screen, "white",self.triangle(),2)
+    def die(self):
+        self.numberOfLives -=1
     
 
     def update(self, dt):
         keys = pygame.key.get_pressed()
+        mouse_buttons = pygame.mouse.get_pressed()
         forward = pygame.Vector2(0, 1).rotate(self.rotation) 
 
         if keys[pygame.K_a]:
@@ -37,7 +45,7 @@ class Player (CircleShape):
             self.position -= forward * PLAYER_SPEED * dt
         
         self.shootTimer -= dt
-        if keys[pygame.K_SPACE]:
+        if keys[pygame.K_SPACE] or mouse_buttons[0]:
             if self.shootTimer <= 0:
                 self.shootTimer = 0.3
                 self.shoot()

@@ -15,9 +15,10 @@ class Asteroid (CircleShape):
     def update(self, dt):
         self.position += self.velocity * dt
     
-    def split(self):
+    def split(self, player):
         self.kill()
         if self.radius < ASTEROID_MIN_RADIUS:
+            player.add_score(10)
             return
         
         ranAngle = random.uniform(20,50)
@@ -25,5 +26,6 @@ class Asteroid (CircleShape):
         ast2 = Asteroid(self.position.x, self.position.y,self.radius/2)
         ast1.velocity = 1.2 * pygame.Vector2(self.velocity.x, self.velocity.y).rotate(ranAngle)
         ast2.velocity = 1.2 * pygame.Vector2(self.velocity.x, self.velocity.y).rotate(-ranAngle)
+        player.add_score(5)
 
 
